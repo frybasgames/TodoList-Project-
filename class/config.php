@@ -5,7 +5,7 @@ class Config {
 
 
     public function setConf(){
-
+//asasadsa
     }
 
     public function getConf(){
