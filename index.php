@@ -2,7 +2,8 @@
     session_start();
     ob_start();
 include 'header.php';
- echo "sa";   //error_reporting(E_ERROR | E_WARNING | E_PARSE);
+echo "saaaa";
+   //error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
     //error_reporting(E_ALL);
     //ini_set('display_errors', '1');
