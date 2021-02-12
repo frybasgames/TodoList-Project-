@@ -2,7 +2,7 @@
     session_start();
     ob_start();
 include 'header.php';
-echo "sss";
+
    //error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
     //error_reporting(E_ALL);
@@ -10,14 +10,13 @@ echo "sss";
 
 
     if (!isset($_SESSION['isLogged']) && !(@$_SESSION['isLogged'])) {
-    //    include 'chooseAuth.php';
-  //      if(@$_POST['Auth']==='signUp'){
-//
-           include 'signUp.php';
+   //   include 'chooseAuth.php';
+    //  if(@$_POST['Auth']==='signUp'){
+
+       include 'signUp.php';
+   // }if(@$_POST['Auth']==='login'){
+     // include 'login.php';
        // }
-        //if(@$_POST['Auth']==='login'){
-           //include 'login.php';
-        //}
     } else {
         include('class/config.php');
         include('class/todolist.php');

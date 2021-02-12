@@ -4,7 +4,7 @@ include 'header.php';
 
 $signUp = new signUp(date('Ymd'));
 
-$userList = $signUp->getUser();
+//$userList = $signUp->getUser();
 
 $auth = new Auth();
 
@@ -15,7 +15,7 @@ $user = new User();
 
 if (@$sign['login'] === true) {
     $user->setData($sign['data']);
-    header('location:/bootcamp/todolist');
+   // header('location:/bootcamp/todolist');
 }
 
 
