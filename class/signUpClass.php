@@ -1,4 +1,30 @@
 <?php
+include('class/config.php');
+class signUp {
+    private $userName;
+    protected $myUserList;
+    private $db;
+    private $operation = 'user';
+
+    public function __construct(string $userName)
+    {
+        $this->userName = $userName;
+
+        $conf = new DbConfig($userName,$this->operation);
+        $this->db = $conf->getDbFile();
+    }
+
+    public function getUser() : array {
+            $this->myUserList = json_decode(file_get_contents($this->db));
+            return $this->myUserList;
+    }
+
+    // Save file
+    public function save(){
+        file_put_contents($this->db, json_encode($this->myUserList));
+        header('location:/bootcamp/todolist');
+    }
+}
 class Validation
 {
 
@@ -18,10 +44,8 @@ class Validation
     }
 }
 
-
 class User
 {
-
     private $id;
     private $username;
     private $name;
@@ -52,34 +76,40 @@ class User
     }
 }
 
-class Db
+class Db extends signUp
 {
     private $row;
+    private $userList;
 
     public function __construct()
     {
         $this->row = new User();
     }
 
-    public function fetch($username, $password)
+    public function fetch($username,$name,$lastname ,$password)
     {
-        if ($username === 'volkan' && $password === 'demo') {
-            $data = [
-                'id' => 4,
-                'username' => 'volkansengul',
-                'name' => 'volkan',
-                'lastname' => 'sengul'
-            ];
-            return $data;
-        } else {
-            return null;
+        $this->userList = $this->getUser();
+        foreach ($this->userList as $user){
+            if ($user['username'] === $username && $user['password'] === $password) {
+                return null;
+            }else{
+                $data = [
+                    'username' => $username,
+                    'name' => $name,
+                    'lastname' => $lastname,
+                    'password'=> $password
+                ];
+                $this->myUserList[] = $data;
+                $this->save();
+                return $data;
+            }
         }
+
     }
 }
 
-class Auth
+class Auth extends signUp
 {
-
     private $validation;
     private $db;
 
@@ -89,16 +119,15 @@ class Auth
         $this->db = new Db();
     }
 
-    private function getFormData()
+    public function signUp()
     {
-    }
 
-    public function login()
-    {
-        $isValid = $this->validation->validate('username', 'password');
+        $isValid = $this->validation->validate('username', 'name', 'lastname', 'password');
         if ($isValid) {
-            $data = $this->db->fetch($_POST['username'], $_POST['password']);
+            $data = $this->db->fetch($_POST['username'], $_POST['name'], $_POST['lastname'], $_POST['password']);
+
             if ($data !== null) {
+
                 $_SESSION['isLogged'] = true;
                 $_SESSION['user'] = $data;
                 return ['login' => true, 'data' => $data];
@@ -113,4 +142,5 @@ class Auth
             ];
         }
     }
+
 }

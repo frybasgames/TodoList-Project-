@@ -5,7 +5,7 @@ class Config {
 
 
     public function setConf(){
-//asasadsaaaaaaaaa
+
     }
 
     public function getConf(){
@@ -17,12 +17,14 @@ class DbConfig extends Config {
 
     private $dbPath = 'data'.DIRECTORY_SEPARATOR;
     private $dbFile;
+    private $operation;
 
-    public function __construct(string $dbFile)
+    public function __construct(string $dbFile,string $operation)
     {
         $this->dbFile = $dbFile;
+        $this->operation = $operation;
         $dirCheck = is_dir($this->dbPath);
-        $fileCheck = file_exists($this->dbPath . $this->dbFile . '.json');
+        $fileCheck = file_exists($this->dbPath . $this->dbFile . $this->operation . '.json');
         if (!$dirCheck){
             $this->dirCreate();
         }
@@ -36,11 +38,11 @@ class DbConfig extends Config {
     }
 
     private function dbCreate(string $dbName): bool {
-       return file_put_contents($this->dbPath . $dbName . '.json', json_encode([]));
+       return file_put_contents($this->dbPath . $dbName . $this->operation . '.json', json_encode([]));
     }
 
     public function getDbFile() : string {
-        return $this->dbPath . $this->dbFile . '.json';
+        return $this->dbPath . $this->dbFile . $this->operation . '.json';
     }
 
 

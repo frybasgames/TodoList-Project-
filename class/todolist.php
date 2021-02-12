@@ -4,13 +4,14 @@ class TodoList {
     private $todolistName;
     private $myTodoList;
     private $db;
+    private $operation = 'todo';
 
     // init
     public function __construct(string $todoListName)
     {
         $this->todolistName = $todoListName;
 
-        $conf = new DbConfig($todoListName);
+        $conf = new DbConfig($todoListName,$this->operation);
         $this->db = $conf->getDbFile();
     }
 
