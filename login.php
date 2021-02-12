@@ -8,7 +8,7 @@ $user = new User();
 if (@$login['login'] === true) {
     $user->setData($login['data']);
     print_r($user);
-    //header('location:/bootcamp/todolist');
+    header('location:/bootcamp/todolist');
 }
 
 ?>

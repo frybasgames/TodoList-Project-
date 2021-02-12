@@ -1,22 +1,20 @@
 <?php
     session_start();
     ob_start();
-include 'header.php';
-
-   //error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
-    //error_reporting(E_ALL);
-    //ini_set('display_errors', '1');
+    include 'header.php';
+    error_reporting(E_ERROR | E_WARNING | E_PARSE);
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
 
 
     if (!isset($_SESSION['isLogged']) && !(@$_SESSION['isLogged'])) {
-   //   include 'chooseAuth.php';
-    //  if(@$_POST['Auth']==='signUp'){
+    //   include 'chooseAuth.php';
 
-       include 'signUp.php';
-   // }if(@$_POST['Auth']==='login'){
-     // include 'login.php';
-       // }
+        // I wanted to make a membership panel.
+        // I had a problem with the signUpClass-> save () process.
+
+      // include 'signUp.php';
+         include 'login.php';
     } else {
         include('class/config.php');
         include('class/todolist.php');

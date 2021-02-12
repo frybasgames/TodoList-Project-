@@ -29,7 +29,7 @@ class TodoList {
     public function add(){
         $task = @$_POST['mytodo'];
         if (!empty($task)){
-            $this->myTodoList[] = $task;
+            array_unshift($this->myTodoList,$task);
             $this->save();
         }
     }

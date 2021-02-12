@@ -12,21 +12,21 @@ class signUp {
 
         $conf = new DbConfig($userName,$this->operation);
         $this->dbConfig = $conf->getDbFile();
-        echo $this->dbConfig;
     }
 
-     public function getUser() : array {
-   echo $this->dbConfig;
+  //   public function getUser() : array {
         // $this->myUserList = json_decode(file_get_contents($this->db));
-    return $this->myUserList;
-}
+    //return $this->myUserList;
+//}
 
     // Save file
     public function save($name,$data) {
-        $this->myUserList=[];
-        $this->myUserList=$data;
+        echo $name;
+       // print_r($data);
+       // $this->myUserList=[];
+       // $this->myUserList=$data;
 
-        file_put_contents($name, json_encode($this->myUserList));
+      // file_put_contents($name, json_encode($this->myUserList));
         //header('location:/bootcamp/todolist');
     }
 
@@ -95,11 +95,6 @@ class Db extends signUp
 
     public function fetch($username,$name,$lastname ,$password)
     {
-       // $this->userList = $this->getUser();
-    //    foreach ($this->userList as $user){
-          //  if ($user['username'] === $username && $user['password'] === $password) {
-            //    return null;
-            //}else{
                 $data = [
                     'username' => $username,
                     'name' => $name,
@@ -107,8 +102,6 @@ class Db extends signUp
                     'password'=> $password
                 ];
                 return $data;
-      //      }
-     //   }
 
     }
 }
@@ -134,8 +127,8 @@ private $signUp;
             if ($data !== null) {
                 //$this->myUserList[] = $this->getUser();
                 $this->myUserList[] = $data;
-                $signUp = new signUp(date('Ymd'));
-                $this->save($signUp,$data);
+                //$signUp = new signUp(date('Ymd'));
+               //$this->save($signUp,$data);
 
                 $_SESSION['isLogged'] = true;
                 $_SESSION['user'] = $data;
